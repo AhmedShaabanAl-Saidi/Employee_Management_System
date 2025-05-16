@@ -42,8 +42,11 @@
                     }
                 </div>
 
-                <button [disabled]="loginForm.invalid" type="submit" class="btn btn-info mt-3 d-block w-100">
+                <button [disabled]="loginForm.invalid || isLoading" class="btn btn-info mt-3 d-block w-100">
                     Login
+                    @if (isLoading) {
+                    <i class="fas fa-spinner fa-spin"></i>
+                    }
                 </button>
 
                 <div class="form-note d-flex justify-content-center align-items-center mt-3">

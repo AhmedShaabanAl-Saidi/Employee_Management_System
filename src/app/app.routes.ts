@@ -4,6 +4,8 @@ import { LoginComponent } from './Pages/login/login.component';
 import { MainLayoutComponent } from './Layouts/main-layout/main-layout.component';
 import { HomeComponent } from './Pages/home/home.component';
 import { NotFoundComponent } from './Pages/not-found/not-found.component';
+import { authGuard } from './Core/guards/authantactions/auth.guard';
+import { loggedGuard } from './Core/guards/logged/logged.guard';
 
 export const routes: Routes = [
   {
@@ -15,6 +17,7 @@ export const routes: Routes = [
   {
     path: '',
     component: AuthLayoutComponent,
+    canActivate : [loggedGuard],
     children: [
       {
         path: 'login',
@@ -27,6 +30,7 @@ export const routes: Routes = [
   {
     path: '',
     component: MainLayoutComponent,
+    canActivate: [authGuard],
     children: [
       {
         path: 'home',
