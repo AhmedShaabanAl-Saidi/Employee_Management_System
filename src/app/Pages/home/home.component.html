@@ -48,32 +48,80 @@
                 </div>
 
                 <div class="modal-body">
-                    <form>
+                    <form [formGroup]="addNewEmployee" (ngSubmit)="SubmitAddNewEmployee()">
                         <div class="mb-3">
-                            <label for="empName" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="empName" placeholder="Enter name">
+                            <label for="name" class="form-label">Name</label>
+                            <input formControlName="name" type="text" class="form-control" id="name"
+                                placeholder="Enter name">
+
+                            <!-- validation -->
+                            @if (addNewEmployee.get('name')?.errors && (addNewEmployee.get('name')?.touched ||
+                            addNewEmployee.get('name')?.dirty)) {
+                            <div class="alert alert-danger m-0 p-1 shadow">
+                                @if (addNewEmployee.get('name')?.getError('required')) {
+                                <span>Name is required</span>
+                                }
+                            </div>
+                            }
                         </div>
 
                         <div class="mb-3">
-                            <label for="empEmail" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="empEmail" placeholder="Enter email">
+                            <label for="email" class="form-label">Email</label>
+                            <input formControlName="email" type="email" class="form-control" id="email"
+                                placeholder="Enter email">
+
+                            <!-- validation -->
+                            @if (addNewEmployee.get('email')?.errors && (addNewEmployee.get('email')?.touched ||
+                            addNewEmployee.get('email')?.dirty)) {
+                            <div class="alert alert-danger m-0 p-1 shadow">
+                                @if (addNewEmployee.get('email')?.getError('required')) {
+                                <span>Email is required</span>
+                                }@else if (addNewEmployee.get('email')?.getError('email')) {
+                                <span>Enter valid Email</span>
+                                }
+                            </div>
+                            }
                         </div>
 
                         <div class="mb-3">
-                            <label for="empImage" class="form-label">Image URL</label>
-                            <input type="text" class="form-control" id="empImage" placeholder="https://...">
+                            <label for="img" class="form-label">Image URL</label>
+                            <input formControlName="image" type="text" class="form-control" id="img"
+                                placeholder="https://...">
+
+                            <!-- validation -->
+                            @if (addNewEmployee.get('image')?.errors && (addNewEmployee.get('image')?.touched ||
+                            addNewEmployee.get('image')?.dirty)) {
+                            <div class="alert alert-danger m-0 p-1 shadow">
+                                @if (addNewEmployee.get('image')?.getError('required')) {
+                                <span>Image is required</span>
+                                }
+                            </div>
+                            }
                         </div>
 
                         <div class="mb-3">
-                            <label for="empSalary" class="form-label">Salary</label>
-                            <input type="number" class="form-control" id="empSalary" placeholder="Enter salary">
+                            <label for="salary" class="form-label">Salary</label>
+                            <input formControlName="salary" type="number" class="form-control" id="salary"
+                                placeholder="Enter salary">
+
+                            <!-- validation -->
+                            @if (addNewEmployee.get('salary')?.errors && (addNewEmployee.get('salary')?.touched ||
+                            addNewEmployee.get('salary')?.dirty)) {
+                            <div class="alert alert-danger m-0 p-1 shadow">
+                                @if (addNewEmployee.get('salary')?.getError('required')) {
+                                <span>Salary is required</span>
+                                }@else if (addNewEmployee.get('salary')?.getError('min')) {
+                                <span>Enter valid Salary</span>
+                                }
+                            </div>
+                            }
                         </div>
+
+                        <button type="submit" [disabled]="addNewEmployee.invalid" class="btn btn-success w-100"
+                            data-bs-dismiss="modal">
+                            Add Employee
+                        </button>
                     </form>
-                </div>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <button type="button" class="btn btn-success" data-bs-dismiss="modal">Add Employee</button>
                 </div>
             </div>
         </div>

@@ -1,9 +1,14 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-home',
-  imports: [],
+  imports: [ReactiveFormsModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
@@ -14,4 +19,8 @@ export class HomeComponent {
     image: new FormControl(null, [Validators.required]),
     salary: new FormControl(null, [Validators.required, Validators.min(0)]),
   });
+
+  SubmitAddNewEmployee(): void {
+    console.log(this.addNewEmployee.value)
+  }
 }
