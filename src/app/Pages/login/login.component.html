@@ -6,22 +6,49 @@
                 <span>Enter your credentials to login</span>
             </div>
 
-            <form>
+            <form [formGroup]="loginForm" (ngSubmit)="SubmitLoginForm()">
                 <div class="my-2">
                     <label for="email">Email :</label>
-                    <input type="email" name="email" id="email" class="form-control mt-1" placeholder="ahmedshaaban@gmail.com">
+                    <input formControlName="email" type="email" name="email" id="email" class="form-control mt-1"
+                        placeholder="ahmedshaaban@gmail.com">
+
+                    <!-- validation -->
+                    @if (loginForm.get('email')?.errors && (loginForm.get('email')?.touched ||
+                    loginForm.get('email')?.dirty)) {
+                    <div class="alert alert-danger m-0 p-1 shadow">
+                        @if (loginForm.get('email')?.getError('required')) {
+                        <span>Email is required</span>
+                        }@else if (loginForm.get('email')?.getError('email')) {
+                        <span>Enter valid Email</span>
+                        }
+                    </div>
+                    }
                 </div>
                 <div class="my-2">
                     <label for="password">Password :</label>
-                    <input type="password" name="password" id="password" class="form-control mt-1" placeholder="*******">
+                    <input formControlName="password" type="password" name="password" id="password"
+                        class="form-control mt-1" placeholder="*******">
+
+                    <!-- validation -->
+                    @if (loginForm.get('password')?.errors && (loginForm.get('password')?.touched ||
+                    loginForm.get('password')?.dirty)) {
+                    <div class="alert alert-danger m-0 p-1 shadow">
+                        @if (loginForm.get('password')?.getError('required')) {
+                        <span>Password is required</span>
+                        }@else if (loginForm.get('password')?.getError('pattern')) {
+                        <span>Password must be "admin"</span>
+                        }
+                    </div>
+                    }
                 </div>
 
-                <button class="btn btn-info mt-3 d-block w-100">
+                <button [disabled]="loginForm.invalid" type="submit" class="btn btn-info mt-3 d-block w-100">
                     Login
                 </button>
 
                 <div class="form-note d-flex justify-content-center align-items-center mt-3">
-                    <p class="m-0"><span class="fw-semibold">Demo credentials:</span> any email with password "admin"</p>
+                    <p class="m-0"><span class="fw-semibold">Demo credentials:</span> any email with password "admin"
+                    </p>
                 </div>
             </form>
         </div>
