@@ -9,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { Employee } from '../../Core/interfaces/employee';
 import { EmployeesService } from '../../Core/services/employees/employees.service';
 import { ToastrService } from 'ngx-toastr';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-home',
@@ -83,8 +84,6 @@ export class HomeComponent implements OnInit {
   }
 
   deleteEmployee(id: number): void {
-    if (!confirm('Are you sure you want to delete this employee?')) return;
-
     this.empService.delete(id).subscribe({
       next: () => {
         this.getEmployees();
@@ -99,5 +98,28 @@ export class HomeComponent implements OnInit {
   resetForm(): void {
     this.addNewEmployee.reset();
     this.editingId = null;
+  }
+
+  // sweetAlert
+  confirmBox(id: number) {
+    Swal.fire({
+      title: 'Are you sure want to remove?',
+      text: 'You will not be able to recover this file!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'No, keep it',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire(
+          'Deleted!',
+          'Your imaginary file has been deleted.',
+          'success'
+        );
+        this.deleteEmployee(id);
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire('Cancelled', 'Your imaginary file is safe :)', 'error');
+      }
+    });
   }
 }

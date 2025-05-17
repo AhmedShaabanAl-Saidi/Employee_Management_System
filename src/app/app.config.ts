@@ -24,6 +24,7 @@ import { provideToastr } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { loadingInterceptor } from './Core/Interceptors/loading/loading.interceptor';
 import { errorsInterceptor } from './Core/Interceptors/errors/errors.interceptor';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -39,7 +40,7 @@ export const appConfig: ApplicationConfig = {
     provideAnimations(),
     provideToastr(),
 
-    // Spinner
-    importProvidersFrom(NgxSpinnerModule),
+    // Spinner and sweetalert2
+    importProvidersFrom(NgxSpinnerModule , SweetAlert2Module),
   ],
 };
