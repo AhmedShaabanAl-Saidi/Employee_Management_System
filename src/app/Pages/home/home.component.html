@@ -7,6 +7,12 @@
         </button>
     </div>
 
+    <!-- Search Bar -->
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Search by name or email..." [(ngModel)]="searchText" />
+        <span class="input-group-text"><i class="fa fa-search"></i></span>
+    </div>
+
     <table class="table table-bordered table-hover text-center align-middle shadow">
         <thead class="table-dark">
             <tr>
@@ -18,7 +24,7 @@
             </tr>
         </thead>
         <tbody>
-            @for (emp of employees; track emp.id) {
+            @for (emp of employees | search: searchText; track emp.id) {
             <tr>
                 <td><img [src]="emp.image" class="rounded-circle" width="50" height="50" /></td>
                 <td>{{ emp.name }}</td>
@@ -76,8 +82,6 @@
                             <label for="email" class="form-label">Email</label>
                             <input formControlName="email" type="email" class="form-control" id="email"
                                 placeholder="Enter email" />
-
-                            <!-- validation  -->
                             @if (addNewEmployee.get('email')?.errors && (addNewEmployee.get('email')?.touched ||
                             addNewEmployee.get('email')?.dirty)) {
                             <div class="alert alert-danger m-0 p-1 shadow">
@@ -94,8 +98,6 @@
                             <label for="img" class="form-label">Image URL</label>
                             <input formControlName="image" type="text" class="form-control" id="img"
                                 placeholder="https://..." />
-
-                            <!-- validation  -->
                             @if (addNewEmployee.get('image')?.errors && (addNewEmployee.get('image')?.touched ||
                             addNewEmployee.get('image')?.dirty)) {
                             <div class="alert alert-danger m-0 p-1 shadow">
@@ -110,8 +112,6 @@
                             <label for="salary" class="form-label">Salary</label>
                             <input formControlName="salary" type="number" class="form-control" id="salary"
                                 placeholder="Enter salary" />
-
-                            <!-- validation  -->
                             @if (addNewEmployee.get('salary')?.errors && (addNewEmployee.get('salary')?.touched ||
                             addNewEmployee.get('salary')?.dirty)) {
                             <div class="alert alert-danger m-0 p-1 shadow">

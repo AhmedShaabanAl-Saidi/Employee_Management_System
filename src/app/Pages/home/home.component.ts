@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {
   FormControl,
   FormGroup,
+  FormsModule,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
@@ -10,17 +11,19 @@ import { Employee } from '../../Core/interfaces/employee';
 import { EmployeesService } from '../../Core/services/employees/employees.service';
 import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
+import { SearchPipe } from '../../Shared/pipes/search.pipe';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule,SearchPipe,FormsModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
 export class HomeComponent implements OnInit {
   employees: Employee[] = [];
   editingId: number | null = null;
+  searchText: string = '';
 
   addNewEmployee: FormGroup = new FormGroup({
     name: new FormControl('', [Validators.required]),

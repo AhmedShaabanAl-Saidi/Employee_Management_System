@@ -69,6 +69,13 @@
       "email": "mohamedamr@gmail.com",
       "image": "https://randomuser.me/api/portraits/men/65.jpg",
       "salary": 11000
+    },
+    {
+      "id": "d17d",
+      "name": "Ahmed Al-Saidi",
+      "email": "ahmedshaaban123321@gmail.com",
+      "image": "https://randomuser.me/api/portraits/men/33.jpg",
+      "salary": 40
     }
   ]
 }
