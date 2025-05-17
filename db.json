@@ -1,0 +1,67 @@
+{
+  "employees": [
+    {
+      "name": "Ahmed",
+      "email": "ahmedali@gmail.com",
+      "image": "https://randomuser.me/api/portraits/men/33.jpg",
+      "salary": 5000,
+      "id": "2"
+    },
+    {
+      "id": "3",
+      "name": "Ahmed Mohamed",
+      "email": "ahmedMohamed@gmail.com",
+      "image": "https://randomuser.me/api/portraits/men/34.jpg",
+      "salary": 12000
+    },
+    {
+      "id": "4",
+      "name": "Mohamed Amr",
+      "email": "mohamedamr@gmail.com",
+      "image": "https://randomuser.me/api/portraits/men/35.jpg",
+      "salary": 11000
+    },
+    {
+      "id": "5",
+      "name": "Amr Mohamed",
+      "email": "amrmohamed@gmail.com",
+      "image": "https://randomuser.me/api/portraits/men/36.jpg",
+      "salary": 15000
+    },
+    {
+      "id": "6",
+      "name": "Ahmed Shaaban",
+      "email": "ahmedshaaban@gmail.com",
+      "image": "https://randomuser.me/api/portraits/men/50.jpg",
+      "salary": 10000
+    },
+    {
+      "id": "7",
+      "name": "Ahmed Ali",
+      "email": "ahmedali@gmail.com",
+      "image": "https://randomuser.me/api/portraits/men/51.jpg",
+      "salary": 15000
+    },
+    {
+      "id": "8",
+      "name": "Ahmed Mohamed",
+      "email": "ahmedMohamed@gmail.com",
+      "image": "https://randomuser.me/api/portraits/men/52.jpg",
+      "salary": 12000
+    },
+    {
+      "id": "9",
+      "name": "Mohamed Amr",
+      "email": "mohamedamr@gmail.com",
+      "image": "https://randomuser.me/api/portraits/men/53.jpg",
+      "salary": 11000
+    },
+    {
+      "id": "10",
+      "name": "Amr Mohamed",
+      "email": "amrmohamed@gmail.com",
+      "image": "https://randomuser.me/api/portraits/men/54.jpg",
+      "salary": 15000
+    }
+  ]
+}

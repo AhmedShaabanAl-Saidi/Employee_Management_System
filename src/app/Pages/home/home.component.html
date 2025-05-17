@@ -1,7 +1,8 @@
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h3 class="m-0">Employees List</h3>
-        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createEmployeeModal">
+        <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createEmployeeModal"
+            (click)="resetForm()">
             <i class="fa fa-plus me-1"></i> Create New Employee
         </button>
     </div>
@@ -17,23 +18,27 @@
             </tr>
         </thead>
         <tbody>
+            @for (emp of employees; track emp.id) {
             <tr>
+                <td><img [src]="emp.image" class="rounded-circle" width="50" height="50" /></td>
+                <td>{{ emp.name }}</td>
+                <td>{{ emp.email }}</td>
+                <td>{{ emp.salary }} EGP</td>
                 <td>
-                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Employee Image"
-                        class="rounded-circle" width="50" height="50">
-                </td>
-                <td>Ahmed Shaaban</td>
-                <td>ahmed&#64;gmail.com</td>
-                <td>10000 EGP</td>
-                <td>
-                    <button class="btn btn-sm btn-warning me-1">
+                    <button class="btn btn-sm btn-warning me-1" (click)="editEmployee(emp)" data-bs-toggle="modal"
+                        data-bs-target="#createEmployeeModal">
                         <i class="fa fa-edit"></i> Update
                     </button>
-                    <button class="btn btn-sm btn-danger">
+                    <button class="btn btn-sm btn-danger" (click)="deleteEmployee(emp.id!)">
                         <i class="fa fa-trash"></i> Delete
                     </button>
                 </td>
             </tr>
+            } @empty {
+            <tr>
+                <td colspan="5" class="text-muted text-center">No employees found.</td>
+            </tr>
+            }
         </tbody>
     </table>
 
@@ -43,8 +48,11 @@
         <div class="modal-dialog">
             <div class="modal-content shadow">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="createEmployeeModalLabel">Create New Employee</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h5 class="modal-title" id="createEmployeeModalLabel">
+                        {{ editingId === null ? 'Create New Employee' : 'Update Employee' }}
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        (click)="resetForm()"></button>
                 </div>
 
                 <div class="modal-body">
@@ -52,9 +60,7 @@
                         <div class="mb-3">
                             <label for="name" class="form-label">Name</label>
                             <input formControlName="name" type="text" class="form-control" id="name"
-                                placeholder="Enter name">
-
-                            <!-- validation -->
+                                placeholder="Enter name" />
                             @if (addNewEmployee.get('name')?.errors && (addNewEmployee.get('name')?.touched ||
                             addNewEmployee.get('name')?.dirty)) {
                             <div class="alert alert-danger m-0 p-1 shadow">
@@ -68,15 +74,15 @@
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
                             <input formControlName="email" type="email" class="form-control" id="email"
-                                placeholder="Enter email">
+                                placeholder="Enter email" />
 
-                            <!-- validation -->
+                            <!-- validation  -->
                             @if (addNewEmployee.get('email')?.errors && (addNewEmployee.get('email')?.touched ||
                             addNewEmployee.get('email')?.dirty)) {
                             <div class="alert alert-danger m-0 p-1 shadow">
                                 @if (addNewEmployee.get('email')?.getError('required')) {
                                 <span>Email is required</span>
-                                }@else if (addNewEmployee.get('email')?.getError('email')) {
+                                } @else if (addNewEmployee.get('email')?.getError('email')) {
                                 <span>Enter valid Email</span>
                                 }
                             </div>
@@ -86,9 +92,9 @@
                         <div class="mb-3">
                             <label for="img" class="form-label">Image URL</label>
                             <input formControlName="image" type="text" class="form-control" id="img"
-                                placeholder="https://...">
+                                placeholder="https://..." />
 
-                            <!-- validation -->
+                            <!-- validation  -->
                             @if (addNewEmployee.get('image')?.errors && (addNewEmployee.get('image')?.touched ||
                             addNewEmployee.get('image')?.dirty)) {
                             <div class="alert alert-danger m-0 p-1 shadow">
@@ -102,15 +108,15 @@
                         <div class="mb-3">
                             <label for="salary" class="form-label">Salary</label>
                             <input formControlName="salary" type="number" class="form-control" id="salary"
-                                placeholder="Enter salary">
+                                placeholder="Enter salary" />
 
-                            <!-- validation -->
+                            <!-- validation  -->
                             @if (addNewEmployee.get('salary')?.errors && (addNewEmployee.get('salary')?.touched ||
                             addNewEmployee.get('salary')?.dirty)) {
                             <div class="alert alert-danger m-0 p-1 shadow">
                                 @if (addNewEmployee.get('salary')?.getError('required')) {
                                 <span>Salary is required</span>
-                                }@else if (addNewEmployee.get('salary')?.getError('min')) {
+                                } @else if (addNewEmployee.get('salary')?.getError('min')) {
                                 <span>Enter valid Salary</span>
                                 }
                             </div>
@@ -119,7 +125,7 @@
 
                         <button type="submit" [disabled]="addNewEmployee.invalid" class="btn btn-success w-100"
                             data-bs-dismiss="modal">
-                            Add Employee
+                            {{ editingId === null ? 'Add Employee' : 'Update Employee' }}
                         </button>
                     </form>
                 </div>
