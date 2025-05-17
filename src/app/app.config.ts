@@ -23,6 +23,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideToastr } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { loadingInterceptor } from './Core/Interceptors/loading/loading.interceptor';
+import { errorsInterceptor } from './Core/Interceptors/errors/errors.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -33,7 +34,7 @@ export const appConfig: ApplicationConfig = {
       withInMemoryScrolling({ scrollPositionRestoration: 'top' })
     ),
     provideClientHydration(withEventReplay()),
-    provideHttpClient(withFetch(), withInterceptors([loadingInterceptor])),
+    provideHttpClient(withFetch(), withInterceptors([loadingInterceptor,errorsInterceptor])),
     // Toastr
     provideAnimations(),
     provideToastr(),

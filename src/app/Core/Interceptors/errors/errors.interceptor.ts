@@ -1,5 +1,21 @@
 import { HttpInterceptorFn } from '@angular/common/http';
+import { inject } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { catchError, throwError } from 'rxjs';
 
 export const errorsInterceptor: HttpInterceptorFn = (req, next) => {
-  return next(req);
+  const toastrService = inject(ToastrService);
+
+  return next(req).pipe(
+    catchError((err) => {
+      toastrService.error(
+        'Something went wrong. Please try again later.',
+        'Error'
+      );
+
+      return throwError(() => {
+        err;
+      });
+    })
+  );
 };

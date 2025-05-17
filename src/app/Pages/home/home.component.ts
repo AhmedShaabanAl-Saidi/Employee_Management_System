@@ -39,10 +39,8 @@ export class HomeComponent implements OnInit {
 
   getEmployees(): void {
     this.empService.getAll().subscribe({
-      next: (res) => (this.employees = res),
-      error: (err) => {
-        console.error('Failed to fetch employees:', err);
-        this.toastr.error('Failed to display employees', 'Display Employees');
+      next: (res) => {
+        this.employees = res;
       },
     });
   }
@@ -63,10 +61,6 @@ export class HomeComponent implements OnInit {
             'Add New Employee'
           );
         },
-        error: (err) => {
-          console.error('Failed to add employee:', err);
-          this.toastr.error('Failed to add employee', 'Add New Employee');
-        },
       });
     } else {
       // Update
@@ -78,10 +72,6 @@ export class HomeComponent implements OnInit {
             'update employee successfully',
             'Update Employee'
           );
-        },
-        error: (err) => {
-          console.error('Failed to update employee:', err);
-          this.toastr.error('Failed to update employee', 'Update Employee');
         },
       });
     }
@@ -102,10 +92,6 @@ export class HomeComponent implements OnInit {
           'A employee has been delete successfully.',
           'Delete Employee'
         );
-      },
-      error: (err) => {
-        console.error('Failed to delete employee:', err);
-        this.toastr.error('Failed to delete employee', 'Delete Employee');
       },
     });
   }
