@@ -1,18 +1,11 @@
 {
   "employees": [
     {
-      "name": "Ahmed",
-      "email": "ahmedali@gmail.com",
-      "image": "https://randomuser.me/api/portraits/men/33.jpg",
-      "salary": 5000,
-      "id": "2"
-    },
-    {
-      "id": "3",
       "name": "Ahmed Mohamed",
       "email": "ahmedMohamed@gmail.com",
       "image": "https://randomuser.me/api/portraits/men/34.jpg",
-      "salary": 12000
+      "salary": 170000,
+      "id": "3"
     },
     {
       "id": "4",
@@ -62,6 +55,13 @@
       "email": "amrmohamed@gmail.com",
       "image": "https://randomuser.me/api/portraits/men/54.jpg",
       "salary": 15000
+    },
+    {
+      "id": "baeb",
+      "name": "Ahmed Al-Saidi",
+      "email": "ahmedshaaban123321@gmail.com",
+      "image": "https://randomuser.me/api/portraits/men/33.jpg",
+      "salary": 51212121
     }
   ]
 }
