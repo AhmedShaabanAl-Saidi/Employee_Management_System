@@ -5,6 +5,7 @@ import {
 } from '@angular/core';
 import {
   provideRouter,
+  withHashLocation,
   withInMemoryScrolling,
   withViewTransitions,
 } from '@angular/router';
@@ -32,15 +33,19 @@ export const appConfig: ApplicationConfig = {
     provideRouter(
       routes,
       withViewTransitions(),
-      withInMemoryScrolling({ scrollPositionRestoration: 'top' })
+      withInMemoryScrolling({ scrollPositionRestoration: 'top' }),
+      withHashLocation()
     ),
     provideClientHydration(withEventReplay()),
-    provideHttpClient(withFetch(), withInterceptors([loadingInterceptor,errorsInterceptor])),
+    provideHttpClient(
+      withFetch(),
+      withInterceptors([loadingInterceptor, errorsInterceptor])
+    ),
     // Toastr
     provideAnimations(),
     provideToastr(),
 
     // Spinner and sweetalert2
-    importProvidersFrom(NgxSpinnerModule , SweetAlert2Module),
+    importProvidersFrom(NgxSpinnerModule, SweetAlert2Module),
   ],
 };

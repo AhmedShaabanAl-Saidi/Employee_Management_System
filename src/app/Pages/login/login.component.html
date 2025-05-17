@@ -1,21 +1,20 @@
-<section class="login-page">
+<section class="login-page py-5">
     <div class="container">
-        <div class="w-50 mx-auto shadow-lg rounded p-3 bg-body-secondary">
-            <div class="form-title d-flex justify-content-center align-items-center flex-column">
+        <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5 mx-auto shadow-lg rounded p-4 bg-body-secondary">
+            <div class="form-title text-center mb-3">
                 <h3>Employee Management System</h3>
                 <span>Enter your credentials to login</span>
             </div>
 
             <form [formGroup]="loginForm" (ngSubmit)="SubmitLoginForm()">
-                <div class="my-2">
-                    <label for="email">Email :</label>
-                    <input formControlName="email" type="email" name="email" id="email" class="form-control mt-1"
-                        placeholder="ahmedshaaban@gmail.com">
-
-                    <!-- validation -->
+                <!-- Email Input -->
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email:</label>
+                    <input formControlName="email" type="email" name="email" id="email" class="form-control"
+                        placeholder="ahmedshaaban@gmail.com" />
                     @if (loginForm.get('email')?.errors && (loginForm.get('email')?.touched ||
                     loginForm.get('email')?.dirty)) {
-                    <div class="alert alert-danger m-0 p-1 shadow">
+                    <div class="alert alert-danger mt-2 py-1 px-2">
                         @if (loginForm.get('email')?.getError('required')) {
                         <span>Email is required</span>
                         }@else if (loginForm.get('email')?.getError('email')) {
@@ -24,15 +23,15 @@
                     </div>
                     }
                 </div>
-                <div class="my-2">
-                    <label for="password">Password :</label>
-                    <input formControlName="password" type="password" name="password" id="password"
-                        class="form-control mt-1" placeholder="*******">
 
-                    <!-- validation -->
+                <!-- Password Input -->
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password:</label>
+                    <input formControlName="password" type="password" name="password" id="password" class="form-control"
+                        placeholder="*******" />
                     @if (loginForm.get('password')?.errors && (loginForm.get('password')?.touched ||
                     loginForm.get('password')?.dirty)) {
-                    <div class="alert alert-danger m-0 p-1 shadow">
+                    <div class="alert alert-danger mt-2 py-1 px-2">
                         @if (loginForm.get('password')?.getError('required')) {
                         <span>Password is required</span>
                         }@else if (loginForm.get('password')?.getError('pattern')) {
@@ -42,15 +41,19 @@
                     }
                 </div>
 
-                <button [disabled]="loginForm.invalid || isLoading" class="btn btn-info mt-3 d-block w-100">
+                <!-- Submit Button -->
+                <button [disabled]="loginForm.invalid || isLoading" class="btn btn-info w-100 mb-3">
                     Login
                     @if (isLoading) {
-                    <i class="fas fa-spinner fa-spin"></i>
+                    <i class="fas fa-spinner fa-spin ms-2"></i>
                     }
                 </button>
 
-                <div class="form-note d-flex justify-content-center align-items-center mt-3">
-                    <p class="m-0"><span class="fw-semibold">Demo credentials:</span> any email with password "admin"
+                <!-- Demo Note -->
+                <div class="form-note text-center">
+                    <p class="m-0">
+                        <span class="fw-semibold">Demo credentials:</span>
+                        any email with password "admin"
                     </p>
                 </div>
             </form>

@@ -1,0 +1,14 @@
+@media (max-width: 576px) {
+    .login-page .form-title h3 {
+        font-size: 1.3rem;
+    }
+
+    .login-page .form-title span {
+        font-size: 0.95rem;
+    }
+
+    .form-note p {
+        font-size: 0.9rem;
+        padding: 0 10px;
+    }
+}

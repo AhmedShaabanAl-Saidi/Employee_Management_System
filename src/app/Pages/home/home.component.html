@@ -1,6 +1,6 @@
 <div class="container mt-4">
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <h3 class="m-0">Employees List</h3>
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-3">
+        <h3 class="m-0 mb-2 mb-md-0">Employees List</h3>
         <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createEmployeeModal"
             (click)="resetForm()">
             <i class="fa fa-plus me-1"></i> Create New Employee
@@ -13,46 +13,50 @@
         <span class="input-group-text"><i class="fa fa-search"></i></span>
     </div>
 
-    <table class="table table-bordered table-hover text-center align-middle shadow">
-        <thead class="table-dark">
-            <tr>
-                <th>Image</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Salary</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @for (emp of employees | search: searchText; track emp.id) {
-            <tr>
-                <td><img [src]="emp.image" class="rounded-circle" width="50" height="50" /></td>
-                <td>{{ emp.name }}</td>
-                <td>{{ emp.email }}</td>
-                <td>{{ emp.salary }} EGP</td>
-                <td>
-                    <button class="btn btn-sm btn-warning me-1" (click)="editEmployee(emp)" data-bs-toggle="modal"
-                        data-bs-target="#createEmployeeModal">
-                        <i class="fa fa-edit"></i> Update
-                    </button>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover text-center align-middle shadow">
+            <thead class="table-dark">
+                <tr>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Salary</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (emp of employees | search: searchText; track emp.id) {
+                <tr>
+                    <td><img [src]="emp.image" class="rounded-circle" width="50" height="50" /></td>
+                    <td>{{ emp.name }}</td>
+                    <td><a href="mailto:{{ emp.email }}" class="text-decoration-none">{{ emp.email }}</a></td>
+                    <td>{{ emp.salary }} EGP</td>
+                    <td>
+                        <div class="d-flex flex-wrap justify-content-center">
+                            <button class="btn btn-sm btn-warning me-1 mb-1" (click)="editEmployee(emp)"
+                                data-bs-toggle="modal" data-bs-target="#createEmployeeModal">
+                                <i class="fa fa-edit"></i> <span class="d-none d-sm-inline px-1">Update</span>
+                            </button>
 
-                    <button class="btn btn-sm btn-danger" (click)="confirmBox(emp.id!)">
-                        <i class="fa fa-trash"></i> Delete
-                    </button>
-                </td>
-            </tr>
-            } @empty {
-            <tr>
-                <td colspan="5" class="text-muted text-center">No employees found.</td>
-            </tr>
-            }
-        </tbody>
-    </table>
+                            <button class="btn btn-sm btn-danger mb-1" (click)="confirmBox(emp.id!)">
+                                <i class="fa fa-trash"></i> <span class="d-none d-sm-inline px-1">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                } @empty {
+                <tr>
+                    <td colspan="5" class="text-muted text-center">No employees found.</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 
     <!-- Modal -->
     <div class="modal fade" id="createEmployeeModal" tabindex="-1" aria-labelledby="createEmployeeModalLabel"
         aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content shadow">
                 <div class="modal-header">
                     <h5 class="modal-title" id="createEmployeeModalLabel">
@@ -68,6 +72,8 @@
                             <label for="name" class="form-label">Name</label>
                             <input formControlName="name" type="text" class="form-control" id="name"
                                 placeholder="Enter name" />
+
+                            <!-- Input validation -->
                             @if (addNewEmployee.get('name')?.errors && (addNewEmployee.get('name')?.touched ||
                             addNewEmployee.get('name')?.dirty)) {
                             <div class="alert alert-danger m-0 p-1 shadow">
@@ -82,6 +88,8 @@
                             <label for="email" class="form-label">Email</label>
                             <input formControlName="email" type="email" class="form-control" id="email"
                                 placeholder="Enter email" />
+
+                            <!-- Input validation -->
                             @if (addNewEmployee.get('email')?.errors && (addNewEmployee.get('email')?.touched ||
                             addNewEmployee.get('email')?.dirty)) {
                             <div class="alert alert-danger m-0 p-1 shadow">
@@ -98,6 +106,8 @@
                             <label for="img" class="form-label">Image URL</label>
                             <input formControlName="image" type="text" class="form-control" id="img"
                                 placeholder="https://..." />
+
+                            <!-- Input validation -->
                             @if (addNewEmployee.get('image')?.errors && (addNewEmployee.get('image')?.touched ||
                             addNewEmployee.get('image')?.dirty)) {
                             <div class="alert alert-danger m-0 p-1 shadow">
@@ -112,12 +122,15 @@
                             <label for="salary" class="form-label">Salary</label>
                             <input formControlName="salary" type="number" class="form-control" id="salary"
                                 placeholder="Enter salary" />
+
+                            <!-- Input validation -->
                             @if (addNewEmployee.get('salary')?.errors && (addNewEmployee.get('salary')?.touched ||
                             addNewEmployee.get('salary')?.dirty)) {
                             <div class="alert alert-danger m-0 p-1 shadow">
                                 @if (addNewEmployee.get('salary')?.getError('required')) {
                                 <span>Salary is required</span>
-                                } @else if (addNewEmployee.get('salary')?.getError('min')) {
+                                } @else if (addNewEmployee.get('salary')?.getError('min') ||
+                                addNewEmployee.get('salary')?.getError('pattern')) {
                                 <span>Enter valid Salary</span>
                                 }
                             </div>

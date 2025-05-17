@@ -29,7 +29,7 @@ export class HomeComponent implements OnInit {
     name: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
     image: new FormControl('', [Validators.required]),
-    salary: new FormControl(null, [Validators.required, Validators.min(0)]),
+    salary: new FormControl(null, [Validators.required, Validators.min(0),Validators.pattern(/^\d+$/)]),
   });
 
   constructor(

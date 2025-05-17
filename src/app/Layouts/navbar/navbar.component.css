@@ -1,0 +1,17 @@
+@media (max-width: 400px) {
+    .navbar-brand {
+        font-size: .9375rem;
+    }
+}
+
+@media (max-width: 320px) {
+    .navbar-brand {
+        font-size: .75rem;
+    }
+}
+
+@media (max-width: 270px) {
+    .navbar-brand {
+        font-size: .625rem;
+    }
+}

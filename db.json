@@ -1,13 +1,6 @@
 {
   "employees": [
     {
-      "id": "7",
-      "name": "Ahmed Ali",
-      "email": "ahmedali@gmail.com",
-      "image": "https://randomuser.me/api/portraits/men/51.jpg",
-      "salary": 15000
-    },
-    {
       "id": "8",
       "name": "Ahmed Mohamed",
       "email": "ahmedMohamed@gmail.com",
@@ -76,6 +69,13 @@
       "email": "ahmedshaaban123321@gmail.com",
       "image": "https://randomuser.me/api/portraits/men/33.jpg",
       "salary": 40
+    },
+    {
+      "id": "462b",
+      "name": "Ahmed Shaaban Abdel Hamid Al-Saidi",
+      "email": "ahmedshaaban123321@gmail.com",
+      "image": "https://randomuser.me/api/portraits/men/34.jpg",
+      "salary": 6000
     }
   ]
 }
