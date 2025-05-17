@@ -52,15 +52,36 @@ export class HomeComponent implements OnInit {
     if (isPlatformBrowser(this.platformId)) {
       // Try loading from localStorage first
       const localData = localStorage.getItem(this.localStorageKey);
+
       if (localData) {
         this.employees = JSON.parse(localData);
       } else {
-        this.empService.getAll().subscribe({
-          next: (res) => {
-            this.employees = res;
-            this.saveToLocalStorage();
+        const initialEmployees = [
+          {
+            id: 4,
+            name: 'Mohamed Amr',
+            email: 'mohamedamr@gmail.com',
+            image: 'https://randomuser.me/api/portraits/men/35.jpg',
+            salary: 11000,
           },
-        });
+          {
+            id: 5,
+            name: 'Amr Mohamed',
+            email: 'amrmohamed@gmail.com',
+            image: 'https://randomuser.me/api/portraits/men/36.jpg',
+            salary: 15000,
+          },
+          {
+            id: 6,
+            name: 'Ahmed Shaaban',
+            email: 'ahmedshaaban@gmail.com',
+            image: 'https://randomuser.me/api/portraits/men/50.jpg',
+            salary: 10000,
+          },
+        ];
+
+        this.employees = initialEmployees;
+        this.saveToLocalStorage();
       }
     } else {
       this.employees = [];
